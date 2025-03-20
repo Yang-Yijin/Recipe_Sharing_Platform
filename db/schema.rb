@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2025_03_18_180557) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "recipe_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_favorites_on_recipe_id"
@@ -23,7 +26,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_180557) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.string "quantity"
-    t.integer "recipe_id", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
@@ -33,7 +36,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_180557) do
     t.string "title"
     t.text "description"
     t.integer "cook_time"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
@@ -42,7 +45,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_18_180557) do
   create_table "steps", force: :cascade do |t|
     t.text "instructions"
     t.integer "position"
-    t.integer "recipe_id", null: false
+    t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
